@@ -1,11 +1,11 @@
-import NavBar from "../components/navbar/NavBar";
-import api from "../api/axiosConfig";
-import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
+import NavBar from "../components/navbar/NavBar";
+import api from "../api/axiosConfig";
+import "./App.css";
 import Home from "../components/home/Home";
 import Archive from "../components/archive/Archive";
 import Plants from "../components/plants/Plants";
@@ -13,8 +13,8 @@ import Seeds from "../components/seeds/Seeds";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [seeds, setSeeds] = useState();
-  const [plants, setPlants] = useState();
+  const [seeds, setSeeds] = useState([]);
+  const [plants, setPlants] = useState([]);
 
   const getSeeds = async () => {
     try {
@@ -49,10 +49,10 @@ function App() {
           <Home />
         </Route>
         <Route path="/seeds">
-          <Seeds />
+          <Seeds seeds={seeds} />
         </Route>
         <Route path="/plants">
-          <Plants />
+          <Plants plants={plants} />
         </Route>
         <Route path="/archive">
           <Archive />
