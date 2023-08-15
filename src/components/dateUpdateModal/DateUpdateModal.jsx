@@ -1,7 +1,11 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import api from "../../api/axiosConfig";
 
-const DateUpdateModal = ({ title }) => {
+const DateUpdateModal = ({ title, plant, refresh }) => {
+  let today = new Date().toISOString().split("T")[0];
+  let dateOfPlanting = plant.dateOfPlanting;
+
   const [show, setShow] = useState(false);
 
   const [date, setDate] = useState(undefined);
@@ -10,6 +14,30 @@ const DateUpdateModal = ({ title }) => {
   const handleShow = () => {
     setDate(undefined);
     setShow(true);
+  };
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+
+    try {
+      switch (title) {
+        case "Date of first fruit":
+          plant.dateOfFirstFruit = date;
+          break;
+        case "Date of first harvested fruit":
+          plant.dateOfFirstHarvestedFruit = date;
+          break;
+        case "Date of disposal":
+          plant.dateOfDisposal = date;
+          break;
+      }
+
+      const response = await api.put(`/api/v1/plants/${id}`, plant);
+
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -24,7 +52,7 @@ const DateUpdateModal = ({ title }) => {
           <form
             id="form"
             onSubmit={(e) => {
-              e.preventDefault();
+              handleUpdate(e, plant.id);
               handleClose();
             }}
           >
@@ -34,6 +62,8 @@ const DateUpdateModal = ({ title }) => {
               </label>
               <input
                 type="date"
+                min={dateOfPlanting}
+                max={today}
                 className="form-control"
                 id="date"
                 required

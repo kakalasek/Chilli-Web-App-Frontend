@@ -9,7 +9,7 @@ const PlantsModal = ({ refresh }) => {
 
   const [type, setType] = useState("");
   const [dateOfPlanting, setDateOfPlanting] = useState(undefined);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const handleAddPlant = async (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const PlantsModal = ({ refresh }) => {
   const handleShow = () => {
     setType("");
     setDateOfPlanting(undefined);
-    setCount(0);
+    setCount(1);
     setShow(true);
   };
 
@@ -89,7 +89,7 @@ const PlantsModal = ({ refresh }) => {
               </label>
               <input
                 type="number"
-                min={0}
+                min={1}
                 className="form-control"
                 id="count"
                 required

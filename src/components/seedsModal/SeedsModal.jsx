@@ -9,7 +9,7 @@ const SeedsModal = ({ refresh }) => {
 
   const [type, setType] = useState("");
   const [dateOfStoring, setDateOfStoring] = useState(undefined);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const handleAddSeed = async (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const SeedsModal = ({ refresh }) => {
   const handleShow = () => {
     setType("");
     setDateOfStoring(undefined);
-    setCount(0);
+    setCount(1);
     setShow(true);
   };
 
@@ -90,7 +90,7 @@ const SeedsModal = ({ refresh }) => {
               </label>
               <input
                 type="number"
-                min={0}
+                min={1}
                 className="form-control"
                 id="count"
                 required

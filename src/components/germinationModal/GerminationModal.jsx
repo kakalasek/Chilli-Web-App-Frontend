@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import api from "../../api/axiosConfig";
 
-const GerminationModal = (props) => {
+const GerminationModal = ({ plant, refresh }) => {
   const [show, setShow] = useState(false);
 
   const [sprouted, setSprouted] = useState(0);
@@ -10,6 +11,20 @@ const GerminationModal = (props) => {
   const handleShow = () => {
     setSprouted(0);
     setShow(true);
+  };
+
+  const handleUpdate = async (e, id) => {
+    e.preventDefault();
+
+    try {
+      plant.sprouted = sprouted;
+
+      const response = await api.put(`/api/v1/plants/${id}`, plant);
+
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -24,7 +39,7 @@ const GerminationModal = (props) => {
           <form
             id="form"
             onSubmit={(e) => {
-              e.preventDefault();
+              handleUpdate(e, plant.id);
               handleClose();
             }}
           >
@@ -35,6 +50,7 @@ const GerminationModal = (props) => {
               <input
                 type="number"
                 min={0}
+                max={plant.count}
                 className="form-control"
                 id="sprouted"
                 required

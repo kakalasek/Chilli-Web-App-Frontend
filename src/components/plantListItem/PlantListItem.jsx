@@ -63,7 +63,7 @@ const PlantListItem = ({ plant, refresh }) => {
         <b>Germination:</b>{" "}
         <i className={getGerminationGrade(germination)}>{germination}%</i>
         {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"}
-        <GerminationModal />
+        <GerminationModal plant={plant} refresh={refresh} />
       </p>
 
       <table className="table">
@@ -79,7 +79,11 @@ const PlantListItem = ({ plant, refresh }) => {
           <th>Day of first fruit</th>
           <th>{dayOfFirstFruit}</th>
           <th>
-            <DateUpdateModal title="Date of first fruit" />
+            <DateUpdateModal
+              title="Date of first fruit"
+              plant={plant}
+              refresh={refresh}
+            />
           </th>
         </tr>
         <tr>
@@ -88,7 +92,11 @@ const PlantListItem = ({ plant, refresh }) => {
           <th>Day of first harvested fruit</th>
           <th>{dayOfFirstHarvestedFruit}</th>
           <th>
-            <DateUpdateModal title="Date of first harvested fruit" />
+            <DateUpdateModal
+              title="Date of first harvested fruit"
+              plant={plant}
+              refresh={refresh}
+            />
           </th>
         </tr>
         <tr>
@@ -97,7 +105,11 @@ const PlantListItem = ({ plant, refresh }) => {
           <th>Day of disposal</th>
           <th>{dayOfDisposal}</th>
           <th>
-            <DateUpdateModal title="Date of disposal" />
+            <DateUpdateModal
+              title="Date of disposal"
+              plant={plant}
+              refresh={refresh}
+            />
           </th>
         </tr>
       </table>
