@@ -1,14 +1,34 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import api from "../../api/axiosConfig";
 
-const SeedsModal = () => {
+const SeedsModal = ({ refresh }) => {
+  let today = new Date().toISOString().split("T")[0];
+
   const [show, setShow] = useState(false);
 
   const [type, setType] = useState("");
   const [dateOfStoring, setDateOfStoring] = useState(undefined);
   const [count, setCount] = useState(0);
 
+  const handleAddSeed = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await api.post("/api/v1/seeds", {
+        type,
+        dateOfStoring,
+        count,
+      });
+
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleClose = () => setShow(false);
+
   const handleShow = () => {
     setType("");
     setDateOfStoring(undefined);
@@ -33,7 +53,7 @@ const SeedsModal = () => {
           <form
             id="form"
             onSubmit={(e) => {
-              e.preventDefault();
+              handleAddSeed(e);
               handleClose();
             }}
           >
@@ -56,6 +76,7 @@ const SeedsModal = () => {
               </label>
               <input
                 type="date"
+                max={today}
                 className="form-control"
                 id="dateOfStoring"
                 required

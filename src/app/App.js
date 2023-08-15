@@ -49,10 +49,10 @@ function App() {
           <Home />
         </Route>
         <Route path="/seeds">
-          <Seeds seeds={seeds} />
+          <Seeds seeds={seeds} refresh={getSeeds} />
         </Route>
         <Route path="/plants">
-          <Plants plants={plants} />
+          <Plants plants={plants} refresh={getPlants} />
         </Route>
         <Route path="/archive">
           <Archive />

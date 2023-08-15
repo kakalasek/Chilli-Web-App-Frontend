@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import GerminationModal from "../germinationModal/GerminationModal";
 import DateUpdateModal from "../dateUpdateModal/DateUpdateModal";
+import api from "../../api/axiosConfig";
 
-const PlantListItem = ({ plant }) => {
+const PlantListItem = ({ plant, refresh }) => {
   const {
     type,
     sprouted,
@@ -40,9 +41,19 @@ const PlantListItem = ({ plant }) => {
     setVisible(false);
   };
 
+  const handleDeletePlant = async (id) => {
+    try {
+      const response = await api.delete(`/api/v1/plants/${id}`);
+
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <h3 className="text-danger">{type}</h3>
+      <h3>{type}</h3>
       <hr />
       <p>
         <b>Count:</b> {count}
@@ -91,7 +102,14 @@ const PlantListItem = ({ plant }) => {
         </tr>
       </table>
       <div style={{ "text-align": "right" }}>
-        {visible && <button className="btn btn-danger">REMOVE</button>}
+        {visible && (
+          <button
+            className="btn btn-danger"
+            onClick={() => handleDeletePlant(plant.id)}
+          >
+            REMOVE
+          </button>
+        )}
       </div>
     </div>
   );

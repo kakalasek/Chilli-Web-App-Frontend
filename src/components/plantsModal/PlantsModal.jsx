@@ -1,12 +1,31 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import api from "../../api/axiosConfig";
 
-const PlantsModal = () => {
+const PlantsModal = ({ refresh }) => {
+  let today = new Date().toISOString().split("T")[0];
+
   const [show, setShow] = useState(false);
 
   const [type, setType] = useState("");
   const [dateOfPlanting, setDateOfPlanting] = useState(undefined);
   const [count, setCount] = useState(0);
+
+  const handleAddPlant = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await api.post("/api/v1/plants", {
+        type,
+        dateOfPlanting,
+        count,
+      });
+
+      refresh();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -33,7 +52,7 @@ const PlantsModal = () => {
           <form
             id="form"
             onSubmit={(e) => {
-              e.preventDefault();
+              handleAddPlant(e);
               handleClose();
             }}
           >
@@ -56,6 +75,7 @@ const PlantsModal = () => {
               </label>
               <input
                 type="date"
+                max={today}
                 className="form-control"
                 id="dateOfPlanting"
                 required

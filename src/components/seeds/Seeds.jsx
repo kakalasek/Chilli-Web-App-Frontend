@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import List from "../list/List";
 import SeedListItem from "../seedListItem/SeedListItem";
 import SeedsModal from "../seedsModal/SeedsModal";
 
-function Seeds({ seeds }) {
+function Seeds({ seeds, refresh }) {
   return (
     <>
-      <SeedsModal />
-      <List items={seeds} resourceName="seed" itemComponent={SeedListItem} />
+      <SeedsModal refresh={refresh} />
+      <List
+        items={seeds}
+        resourceName="seed"
+        itemComponent={SeedListItem}
+        refresh={refresh}
+      />
     </>
   );
 }
