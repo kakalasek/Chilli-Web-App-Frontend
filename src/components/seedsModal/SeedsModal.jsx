@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
+import Dropdown from "react-bootstrap/Dropdown";
 
-const SeedsModal = ({ refresh }) => {
+const SeedsModal = ({ refresh, seeds, sort }) => {
   let today = new Date().toISOString().split("T")[0];
 
   const [show, setShow] = useState(false);
@@ -10,6 +11,8 @@ const SeedsModal = ({ refresh }) => {
   const [type, setType] = useState("");
   const [dateOfStoring, setDateOfStoring] = useState(undefined);
   const [count, setCount] = useState(1);
+
+  const [asc, setAsc] = useState(false);
 
   const handleAddSeed = async (e) => {
     e.preventDefault();
@@ -39,11 +42,27 @@ const SeedsModal = ({ refresh }) => {
   return (
     <>
       <button
-        className="btn btn-outline-danger offset-md-3"
+        className="btn btn-outline-danger offset-md-3 d-inline"
         onClick={handleShow}
       >
         ADD
       </button>
+      <Dropdown className="d-inline offset-md-5">
+        <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+          Sort by
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onClick={() => {
+              sort(!asc);
+              setAsc(!asc);
+            }}
+          >
+            Age
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

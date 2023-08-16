@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const PlantsModal = ({ refresh }) => {
   let today = new Date().toISOString().split("T")[0];
@@ -38,11 +39,24 @@ const PlantsModal = ({ refresh }) => {
   return (
     <>
       <button
-        className="btn btn-outline-danger offset-md-3"
+        className="btn btn-outline-danger offset-md-3 d-inline"
         onClick={handleShow}
       >
         ADD
       </button>
+
+      <Dropdown className="d-inline offset-md-5">
+        <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+          Sort by
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item>Germination</Dropdown.Item>
+          <Dropdown.Item>Date of planting</Dropdown.Item>
+          <Dropdown.Item>Day of first fruit</Dropdown.Item>
+          <Dropdown.Item>Day of first harvested fruit</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

@@ -18,7 +18,7 @@ function App() {
 
   const getSeeds = async () => {
     try {
-      const response = await api.get("/api/v1/seeds");
+      const response = await api.get(`/api/v1/seeds`);
 
       setSeeds(response.data);
     } catch (err) {
@@ -31,6 +31,16 @@ function App() {
       const response = await api.get("/api/v1/plants");
 
       setPlants(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const SortByAge = async (asc) => {
+    try {
+      const response = await api.get(`/api/v1/seeds/${asc}`);
+
+      setSeeds(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -49,7 +59,7 @@ function App() {
           <Home />
         </Route>
         <Route path="/seeds">
-          <Seeds seeds={seeds} refresh={getSeeds} />
+          <Seeds seeds={seeds} refresh={getSeeds} sort={SortByAge} />
         </Route>
         <Route path="/plants">
           <Plants plants={plants} refresh={getPlants} />

@@ -19,13 +19,6 @@ const PlantListItem = ({ plant, refresh }) => {
     count,
   } = plant;
 
-  const [sproutedState, setSprouted] = useState();
-  const [dateOfPlantingState, setDayOfPlanting] = useState();
-  const [dateOfFirstFruitState, setdateOfFirstFruit] = useState();
-  const [dateOfFirstHarvestedFruitState, setdateOfFirstHarvestedFruit] =
-    useState();
-  const [dateOfDisposalState, setdateOfDisposal] = useState();
-
   const [visible, setVisible] = useState(false);
 
   const getGerminationGrade = (germination) => {

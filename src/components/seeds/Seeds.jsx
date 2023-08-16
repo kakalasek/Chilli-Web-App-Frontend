@@ -3,10 +3,10 @@ import List from "../list/List";
 import SeedListItem from "../seedListItem/SeedListItem";
 import SeedsModal from "../seedsModal/SeedsModal";
 
-function Seeds({ seeds, refresh }) {
+function Seeds({ seeds, refresh, sort }) {
   return (
     <>
-      <SeedsModal refresh={refresh} />
+      <SeedsModal refresh={refresh} seeds={seeds} sort={sort} />
       <List
         items={seeds}
         resourceName="seed"
