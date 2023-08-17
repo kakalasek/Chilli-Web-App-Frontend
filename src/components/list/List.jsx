@@ -5,6 +5,7 @@ const List = ({
   resourceName,
   itemComponent: ItemComponent,
   refresh,
+  page,
 }) => {
   const [itemList, setItemList] = useState([]);
 
@@ -21,6 +22,7 @@ const List = ({
               key={item.id}
               {...{ [resourceName]: item }}
               refresh={refresh}
+              page={page}
             />
           </div>
         ))}

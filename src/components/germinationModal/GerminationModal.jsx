@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 
-const GerminationModal = ({ plant, refresh }) => {
+const GerminationModal = ({ plant, refresh, page }) => {
   const [show, setShow] = useState(false);
 
   const [sprouted, setSprouted] = useState(0);
@@ -21,7 +21,7 @@ const GerminationModal = ({ plant, refresh }) => {
 
       const response = await api.put(`/api/v1/plants/${id}`, plant);
 
-      refresh();
+      refresh(page);
     } catch (err) {
       console.log(err);
     }

@@ -16,49 +16,52 @@ function App() {
   const [seeds, setSeeds] = useState([]);
   const [plants, setPlants] = useState([]);
 
-  const getSeeds = async () => {
-    try {
-      const response = await api.get(`/api/v1/seeds`);
+  const [seedsPage, setSeedsPage] = useState(0);
+  const [plantsPage, setPlantsPage] = useState(0);
 
-      setSeeds(response.data);
+  const getSeeds = async (page) => {
+    try {
+      const response = await api.get(`/api/v1/seeds/${page}`);
+
+      setSeeds(response.data.content);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const getPlants = async () => {
+  const getPlants = async (page) => {
     try {
-      const response = await api.get("/api/v1/plants");
+      const response = await api.get(`/api/v1/plants/${page}`);
 
-      setPlants(response.data);
+      setPlants(response.data.content);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const sortByAge = async (asc) => {
+  const sortByAge = async (page, asc) => {
     try {
-      const response = await api.get(`/api/v1/seeds/${asc}`);
+      const response = await api.get(`/api/v1/seeds/${page}/${asc}`);
 
-      setSeeds(response.data);
+      setSeeds(response.data.content);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const sortPlants = async (byWhat, asc) => {
+  const sortPlants = async (page, byWhat, asc) => {
     try {
-      const response = await api.get(`/api/v1/plants/${byWhat}/${asc}`);
+      const response = await api.get(`/api/v1/plants/${page}/${byWhat}/${asc}`);
 
-      setPlants(response.data);
+      setPlants(response.data.content);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    getSeeds();
-    getPlants();
+    getSeeds(seedsPage);
+    getPlants(plantsPage);
   }, []);
 
   return (
@@ -69,10 +72,20 @@ function App() {
           <Home />
         </Route>
         <Route path="/seeds">
-          <Seeds seeds={seeds} refresh={getSeeds} sort={sortByAge} />
+          <Seeds
+            seeds={seeds}
+            refresh={getSeeds}
+            sort={sortByAge}
+            page={seedsPage}
+          />
         </Route>
         <Route path="/plants">
-          <Plants plants={plants} refresh={getPlants} sort={sortPlants} />
+          <Plants
+            plants={plants}
+            refresh={getPlants}
+            sort={sortPlants}
+            page={plantsPage}
+          />
         </Route>
         <Route path="/archive">
           <Archive />

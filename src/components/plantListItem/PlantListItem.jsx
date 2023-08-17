@@ -3,7 +3,7 @@ import GerminationModal from "../germinationModal/GerminationModal";
 import DateUpdateModal from "../dateUpdateModal/DateUpdateModal";
 import api from "../../api/axiosConfig";
 
-const PlantListItem = ({ plant, refresh }) => {
+const PlantListItem = ({ plant, refresh, page }) => {
   const {
     type,
     sprouted,
@@ -38,7 +38,7 @@ const PlantListItem = ({ plant, refresh }) => {
     try {
       const response = await api.delete(`/api/v1/plants/${id}`);
 
-      refresh();
+      refresh(page);
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +56,7 @@ const PlantListItem = ({ plant, refresh }) => {
         <b>Germination:</b>{" "}
         <i className={getGerminationGrade(germination)}>{germination}%</i>
         {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"}
-        <GerminationModal plant={plant} refresh={refresh} />
+        <GerminationModal plant={plant} refresh={refresh} page={page} />
       </p>
 
       <table className="table">
@@ -76,6 +76,7 @@ const PlantListItem = ({ plant, refresh }) => {
               title="Date of first fruit"
               plant={plant}
               refresh={refresh}
+              page={page}
             />
           </th>
         </tr>
@@ -89,6 +90,7 @@ const PlantListItem = ({ plant, refresh }) => {
               title="Date of first harvested fruit"
               plant={plant}
               refresh={refresh}
+              page={page}
             />
           </th>
         </tr>
@@ -102,6 +104,7 @@ const PlantListItem = ({ plant, refresh }) => {
               title="Date of disposal"
               plant={plant}
               refresh={refresh}
+              page={page}
             />
           </th>
         </tr>

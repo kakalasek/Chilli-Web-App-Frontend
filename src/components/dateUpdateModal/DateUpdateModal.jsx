@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 
-const DateUpdateModal = ({ title, plant, refresh }) => {
+const DateUpdateModal = ({ title, plant, refresh, page }) => {
   let today = new Date().toISOString().split("T")[0];
   let dateOfPlanting = plant.dateOfPlanting;
 
@@ -34,7 +34,7 @@ const DateUpdateModal = ({ title, plant, refresh }) => {
 
       const response = await api.put(`/api/v1/plants/${id}`, plant);
 
-      refresh();
+      refresh(page);
     } catch (err) {
       console.log(err);
     }

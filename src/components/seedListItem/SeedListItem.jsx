@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import api from "../../api/axiosConfig";
 
-const SeedListItem = ({ seed, refresh }) => {
+const SeedListItem = ({ seed, refresh, page }) => {
   const { type, dateOfStoring, count, age } = seed;
   const [visible, setVisible] = useState(false);
 
@@ -17,7 +17,7 @@ const SeedListItem = ({ seed, refresh }) => {
     try {
       const response = await api.delete(`/api/v1/seeds/${id}`);
 
-      refresh();
+      refresh(page);
     } catch (err) {
       console.log(err);
     }

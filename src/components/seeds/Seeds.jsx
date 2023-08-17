@@ -3,15 +3,16 @@ import List from "../list/List";
 import SeedListItem from "../seedListItem/SeedListItem";
 import SeedsModal from "../seedsModal/SeedsModal";
 
-function Seeds({ seeds, refresh, sort }) {
+function Seeds({ seeds, refresh, sort, page }) {
   return (
     <>
-      <SeedsModal refresh={refresh} sort={sort} />
+      <SeedsModal refresh={refresh} sort={sort} page={page} />
       <List
         items={seeds}
         resourceName="seed"
         itemComponent={SeedListItem}
         refresh={refresh}
+        page={page}
       />
     </>
   );

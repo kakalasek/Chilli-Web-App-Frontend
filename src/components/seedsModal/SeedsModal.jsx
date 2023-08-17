@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 import Dropdown from "react-bootstrap/Dropdown";
 
-const SeedsModal = ({ refresh, sort }) => {
+const SeedsModal = ({ refresh, sort, page }) => {
   let today = new Date().toISOString().split("T")[0];
 
   const [show, setShow] = useState(false);
@@ -24,7 +24,7 @@ const SeedsModal = ({ refresh, sort }) => {
         count,
       });
 
-      refresh();
+      refresh(page);
     } catch (err) {
       console.log(err);
     }
@@ -55,7 +55,7 @@ const SeedsModal = ({ refresh, sort }) => {
         <Dropdown.Menu>
           <Dropdown.Item
             onClick={() => {
-              sort(!asc);
+              sort(page, !asc);
               setAsc(!asc);
             }}
           >
