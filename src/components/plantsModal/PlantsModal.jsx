@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 import Dropdown from "react-bootstrap/Dropdown";
 
-const PlantsModal = ({ refresh }) => {
+const PlantsModal = ({ refresh, sort }) => {
   let today = new Date().toISOString().split("T")[0];
 
   const [show, setShow] = useState(false);
@@ -11,6 +11,8 @@ const PlantsModal = ({ refresh }) => {
   const [type, setType] = useState("");
   const [dateOfPlanting, setDateOfPlanting] = useState(undefined);
   const [count, setCount] = useState(1);
+
+  const [asc, setAsc] = useState(false);
 
   const handleAddPlant = async (e) => {
     e.preventDefault();
@@ -51,10 +53,38 @@ const PlantsModal = ({ refresh }) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item>Germination</Dropdown.Item>
-          <Dropdown.Item>Date of planting</Dropdown.Item>
-          <Dropdown.Item>Day of first fruit</Dropdown.Item>
-          <Dropdown.Item>Day of first harvested fruit</Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              sort("germination", !asc);
+              setAsc(!asc);
+            }}
+          >
+            Germination
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              sort("dateOfPlanting", !asc);
+              setAsc(!asc);
+            }}
+          >
+            Date of planting
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              sort("dayOfFirstFruit", !asc);
+              setAsc(!asc);
+            }}
+          >
+            Day of first fruit
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => {
+              sort("dayOfFirstHarvestedFruit", !asc);
+              setAsc(!asc);
+            }}
+          >
+            Day of first harvested fruit
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 

@@ -6,7 +6,7 @@ import SeedsModal from "../seedsModal/SeedsModal";
 function Seeds({ seeds, refresh, sort }) {
   return (
     <>
-      <SeedsModal refresh={refresh} seeds={seeds} sort={sort} />
+      <SeedsModal refresh={refresh} sort={sort} />
       <List
         items={seeds}
         resourceName="seed"

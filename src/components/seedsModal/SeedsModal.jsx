@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 import Dropdown from "react-bootstrap/Dropdown";
 
-const SeedsModal = ({ refresh, seeds, sort }) => {
+const SeedsModal = ({ refresh, sort }) => {
   let today = new Date().toISOString().split("T")[0];
 
   const [show, setShow] = useState(false);
