@@ -30,9 +30,15 @@ function App() {
 
       const response = await api.get(`/api/v1/seeds/${page}`);
 
-      if (Object.keys(response.data.content).length !== 0) {
+      if (
+        Object.keys(response.data.content).length !== 0 ||
+        seeds.length === 1
+      ) {
         setSeeds(response.data.content);
       } else {
+        if (seeds.length === 1 && page === 0) {
+          setSeeds(response.data.content);
+        }
         if (page > 0) {
           setSeedsPage(page - 1);
         }
@@ -54,6 +60,9 @@ function App() {
       if (Object.keys(response.data.content).length !== 0) {
         setPlants(response.data.content);
       } else {
+        if (plants.length === 1 && page === 0) {
+          setPlants(response.data.content);
+        }
         if (page > 0) {
           setPlantsPage(page - 1);
         }
@@ -72,10 +81,15 @@ function App() {
 
       const response = await api.get(`/api/v1/archive/${page}`);
 
-      if (Object.keys(response.data.content).length !== 0) {
+      if (
+        Object.keys(response.data.content).length !== 0 ||
+        archive.length == 1
+      ) {
         setArchive(response.data.content);
       } else {
-        console.log(page);
+        if (archive.length === 1 && page === 0) {
+          setArchive(response.data.content);
+        }
         if (page > 0) {
           setArchivePage(page - 1);
         }
@@ -97,6 +111,9 @@ function App() {
       if (Object.keys(response.data.content).length !== 0) {
         setSeeds(response.data.content);
       } else {
+        if (seeds.length === 1 && page === 0) {
+          setSeeds(response.data.content);
+        }
         if (page > 0) {
           setSeedsPage(page - 1);
         }
@@ -118,6 +135,9 @@ function App() {
       if (Object.keys(response.data.content).length !== 0) {
         setPlants(response.data.content);
       } else {
+        if (plants.length === 1 && page === 0) {
+          setPlants(response.data.content);
+        }
         if (page > 0) {
           setPlantsPage(page - 1);
         }
@@ -141,6 +161,9 @@ function App() {
       if (Object.keys(response.data.content).length !== 0) {
         setArchive(response.data.content);
       } else {
+        if (archive.length === 1 && page === 0) {
+          setArchive(response.data.content);
+        }
         if (page > 0) {
           setArchivePage(page - 1);
         }
