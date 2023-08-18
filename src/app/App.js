@@ -15,9 +15,11 @@ import { useEffect, useState } from "react";
 function App() {
   const [seeds, setSeeds] = useState([]);
   const [plants, setPlants] = useState([]);
+  const [archive, setArchive] = useState([]);
 
   const [seedsPage, setSeedsPage] = useState(0);
   const [plantsPage, setPlantsPage] = useState(0);
+  const [archivePage, setArchivePage] = useState(0);
 
   const getSeeds = async (page) => {
     try {
@@ -28,10 +30,12 @@ function App() {
 
       const response = await api.get(`/api/v1/seeds/${page}`);
 
-      if (Object.keys(response.data.content).length != 0) {
+      if (Object.keys(response.data.content).length !== 0) {
         setSeeds(response.data.content);
       } else {
-        setSeedsPage(page - 1);
+        if (page > 0) {
+          setSeedsPage(page - 1);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -47,10 +51,34 @@ function App() {
 
       const response = await api.get(`/api/v1/plants/${page}`);
 
-      if (Object.keys(response.data.content).length != 0) {
+      if (Object.keys(response.data.content).length !== 0) {
         setPlants(response.data.content);
       } else {
-        setPlantsPage(page - 1);
+        if (page > 0) {
+          setPlantsPage(page - 1);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getArchive = async (page) => {
+    try {
+      if (page < 0) {
+        setArchivePage(0);
+        return;
+      }
+
+      const response = await api.get(`/api/v1/archive/${page}`);
+
+      if (Object.keys(response.data.content).length !== 0) {
+        setArchive(response.data.content);
+      } else {
+        console.log(page);
+        if (page > 0) {
+          setArchivePage(page - 1);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -66,10 +94,12 @@ function App() {
 
       const response = await api.get(`/api/v1/seeds/${page}/${asc}`);
 
-      if (Object.keys(response.data.content).length != 0) {
+      if (Object.keys(response.data.content).length !== 0) {
         setSeeds(response.data.content);
       } else {
-        setSeedsPage(page - 1);
+        if (page > 0) {
+          setSeedsPage(page - 1);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -85,10 +115,35 @@ function App() {
 
       const response = await api.get(`/api/v1/plants/${page}/${byWhat}/${asc}`);
 
-      if (Object.keys(response.data.content).length != 0) {
+      if (Object.keys(response.data.content).length !== 0) {
         setPlants(response.data.content);
       } else {
-        setPlantsPage(page - 1);
+        if (page > 0) {
+          setPlantsPage(page - 1);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sortArchive = async (page, byWhat, asc) => {
+    try {
+      if (page < 0) {
+        setArchivePage(0);
+        return;
+      }
+
+      const response = await api.get(
+        `/api/v1/archive/${page}/${byWhat}/${asc}`
+      );
+
+      if (Object.keys(response.data.content).length !== 0) {
+        setArchive(response.data.content);
+      } else {
+        if (page > 0) {
+          setArchivePage(page - 1);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -98,6 +153,7 @@ function App() {
   useEffect(() => {
     getPlants(plantsPage);
     getSeeds(seedsPage);
+    getArchive(archivePage);
   }, []);
 
   return (
@@ -126,7 +182,13 @@ function App() {
           />
         </Route>
         <Route path="/archive">
-          <Archive />
+          <Archive
+            archive={archive}
+            refresh={getArchive}
+            sort={sortArchive}
+            page={archivePage}
+            setPage={setArchivePage}
+          />
         </Route>
       </Switch>
     </Router>
