@@ -3,7 +3,7 @@ import List from "../list/List";
 import SeedListItem from "../seedListItem/SeedListItem";
 import SeedsModal from "../seedsModal/SeedsModal";
 
-function Seeds({ seeds, refresh, sort, page }) {
+function Seeds({ seeds, refresh, sort, page, setPage }) {
   return (
     <>
       <SeedsModal refresh={refresh} sort={sort} page={page} />
@@ -13,6 +13,7 @@ function Seeds({ seeds, refresh, sort, page }) {
         itemComponent={SeedListItem}
         refresh={refresh}
         page={page}
+        setPage={setPage}
       />
     </>
   );

@@ -21,9 +21,18 @@ function App() {
 
   const getSeeds = async (page) => {
     try {
+      if (page < 0) {
+        setSeedsPage(0);
+        return;
+      }
+
       const response = await api.get(`/api/v1/seeds/${page}`);
 
-      setSeeds(response.data.content);
+      if (Object.keys(response.data.content).length != 0) {
+        setSeeds(response.data.content);
+      } else {
+        setSeedsPage(page - 1);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -31,9 +40,18 @@ function App() {
 
   const getPlants = async (page) => {
     try {
+      if (page < 0) {
+        setPlantsPage(0);
+        return;
+      }
+
       const response = await api.get(`/api/v1/plants/${page}`);
 
-      setPlants(response.data.content);
+      if (Object.keys(response.data.content).length != 0) {
+        setPlants(response.data.content);
+      } else {
+        setPlantsPage(page - 1);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -41,9 +59,18 @@ function App() {
 
   const sortByAge = async (page, asc) => {
     try {
+      if (page < 0) {
+        setSeedsPage(0);
+        return;
+      }
+
       const response = await api.get(`/api/v1/seeds/${page}/${asc}`);
 
-      setSeeds(response.data.content);
+      if (Object.keys(response.data.content).length != 0) {
+        setSeeds(response.data.content);
+      } else {
+        setSeedsPage(page - 1);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -51,17 +78,26 @@ function App() {
 
   const sortPlants = async (page, byWhat, asc) => {
     try {
+      if (page < 0) {
+        setPlantsPage(0);
+        return;
+      }
+
       const response = await api.get(`/api/v1/plants/${page}/${byWhat}/${asc}`);
 
-      setPlants(response.data.content);
+      if (Object.keys(response.data.content).length != 0) {
+        setPlants(response.data.content);
+      } else {
+        setPlantsPage(page - 1);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    getSeeds(seedsPage);
     getPlants(plantsPage);
+    getSeeds(seedsPage);
   }, []);
 
   return (
@@ -77,6 +113,7 @@ function App() {
             refresh={getSeeds}
             sort={sortByAge}
             page={seedsPage}
+            setPage={setSeedsPage}
           />
         </Route>
         <Route path="/plants">
@@ -85,6 +122,7 @@ function App() {
             refresh={getPlants}
             sort={sortPlants}
             page={plantsPage}
+            setPage={setPlantsPage}
           />
         </Route>
         <Route path="/archive">
