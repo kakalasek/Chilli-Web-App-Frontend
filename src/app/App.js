@@ -30,10 +30,7 @@ function App() {
 
       const response = await api.get(`/api/v1/seeds/${page}`);
 
-      if (
-        Object.keys(response.data.content).length !== 0 ||
-        seeds.length === 1
-      ) {
+      if (Object.keys(response.data.content).length !== 0) {
         setSeeds(response.data.content);
       } else {
         if (seeds.length === 1 && page === 0) {
@@ -81,10 +78,7 @@ function App() {
 
       const response = await api.get(`/api/v1/archive/${page}`);
 
-      if (
-        Object.keys(response.data.content).length !== 0 ||
-        archive.length == 1
-      ) {
+      if (Object.keys(response.data.content).length !== 0) {
         setArchive(response.data.content);
       } else {
         if (archive.length === 1 && page === 0) {
@@ -179,6 +173,11 @@ function App() {
     getArchive(archivePage);
   }, []);
 
+  const plantsRefresh = (page) => {
+    getPlants(page);
+    getArchive(0);
+  };
+
   return (
     <Router>
       <NavBar />
@@ -198,7 +197,7 @@ function App() {
         <Route path="/plants">
           <Plants
             plants={plants}
-            refresh={getPlants}
+            refresh={plantsRefresh}
             sort={sortPlants}
             page={plantsPage}
             setPage={setPlantsPage}
