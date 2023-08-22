@@ -54,7 +54,9 @@ const PlantListItem = ({ plant, refresh, page }) => {
         <b>Sprouted:</b> {sprouted}
         {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"}
         <b>Germination:</b>{" "}
-        <i className={getGerminationGrade(germination)}>{germination}%</i>
+        <i className={getGerminationGrade(germination)}>
+          {germination.toFixed(2)}%
+        </i>
         {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"} {"\u00A0"}
         <GerminationModal plant={plant} refresh={refresh} page={page} />
       </p>
