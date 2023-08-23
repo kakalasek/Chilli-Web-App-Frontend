@@ -3,6 +3,7 @@ import List from "../list/List";
 import SeedListItem from "../seedListItem/SeedListItem";
 import SeedsModal from "../seedsModal/SeedsModal";
 
+/* Page for stored seeds */
 function Seeds({ seeds, refresh, sort, page, setPage }) {
   return (
     <>

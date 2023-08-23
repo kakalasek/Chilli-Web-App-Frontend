@@ -3,6 +3,7 @@ import GerminationModal from "../germinationModal/GerminationModal";
 import DateUpdateModal from "../dateUpdateModal/DateUpdateModal";
 import api from "../../api/axiosConfig";
 
+/* List item made for plant */
 const PlantListItem = ({ plant, refresh, page }) => {
   const {
     type,
@@ -19,14 +20,17 @@ const PlantListItem = ({ plant, refresh, page }) => {
     count,
   } = plant;
 
+  /* Visibility */
   const [visible, setVisible] = useState(false);
 
+  /* Germination label color */
   const getGerminationGrade = (germination) => {
     if (germination >= 80) return "text-success";
     else if (germination < 80 && germination >= 40) return "text-warning";
     else return "text-danger";
   };
 
+  /* Mouse */
   const handleMouseEnter = () => {
     setVisible(true);
   };
@@ -34,6 +38,7 @@ const PlantListItem = ({ plant, refresh, page }) => {
     setVisible(false);
   };
 
+  /* DELETE */
   const handleDeletePlant = async (id) => {
     try {
       const response = await api.delete(`/api/v1/plants/${id}`);

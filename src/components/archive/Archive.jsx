@@ -3,7 +3,9 @@ import List from "../list/List";
 import PlantListItem from "../plantListItem/PlantListItem";
 import Dropdown from "react-bootstrap/Dropdown";
 
+/* For plants that have already been disposed */
 function Archive({ archive, refresh, sort, page, setPage }) {
+  /* ASC */
   const [asc, setAsc] = useState(false);
 
   return (

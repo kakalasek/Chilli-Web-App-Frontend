@@ -3,17 +3,23 @@ import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 import Dropdown from "react-bootstrap/Dropdown";
 
+/* Modal for creating a new plant */
 const PlantsModal = ({ refresh, sort, page }) => {
+  /* Special variables */
   let today = new Date().toISOString().split("T")[0];
 
+  /* Show */
   const [show, setShow] = useState(false);
 
+  /* Attributes */
   const [type, setType] = useState("");
   const [dateOfPlanting, setDateOfPlanting] = useState(undefined);
   const [count, setCount] = useState(1);
 
+  /* ASC */
   const [asc, setAsc] = useState(false);
 
+  /* POST */
   const handleAddPlant = async (e) => {
     e.preventDefault();
 
@@ -30,6 +36,7 @@ const PlantsModal = ({ refresh, sort, page }) => {
     }
   };
 
+  /* CLOSE and SHOW */
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setType("");

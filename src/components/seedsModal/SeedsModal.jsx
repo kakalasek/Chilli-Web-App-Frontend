@@ -3,17 +3,23 @@ import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 import Dropdown from "react-bootstrap/Dropdown";
 
+/* Modal for creating a new seed */
 const SeedsModal = ({ refresh, sort, page }) => {
+  /* Special variables */
   let today = new Date().toISOString().split("T")[0];
 
+  /* Show */
   const [show, setShow] = useState(false);
 
+  /* Attributes */
   const [type, setType] = useState("");
   const [dateOfStoring, setDateOfStoring] = useState(undefined);
   const [count, setCount] = useState(1);
 
+  /* ASC */
   const [asc, setAsc] = useState(false);
 
+  /* POST */
   const handleAddSeed = async (e) => {
     e.preventDefault();
 
@@ -30,6 +36,7 @@ const SeedsModal = ({ refresh, sort, page }) => {
     }
   };
 
+  /* SHOW and CLOSE */
   const handleClose = () => setShow(false);
 
   const handleShow = () => {

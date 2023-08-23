@@ -2,6 +2,7 @@ import React from "react";
 import chilli from "../../chilli.png";
 import { Link } from "react-router-dom";
 
+/* Navigatiion bar */
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light border border-4 border-success rounded m-2">

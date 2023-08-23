@@ -13,17 +13,21 @@ import Seeds from "../components/seeds/Seeds";
 import { useEffect, useState } from "react";
 
 function App() {
+  /* Arrays */
   const [seeds, setSeeds] = useState([]);
   const [plants, setPlants] = useState([]);
   const [archive, setArchive] = useState([]);
 
+  /* Page numbers */
   const [seedsPage, setSeedsPage] = useState(0);
   const [plantsPage, setPlantsPage] = useState(0);
   const [archivePage, setArchivePage] = useState(0);
 
+  /* Seeds GET*/
   const getSeeds = async (page) => {
     try {
       if (page < 0) {
+        // So the page would never go under zero
         setSeedsPage(0);
         return;
       }
@@ -31,12 +35,15 @@ function App() {
       const response = await api.get(`/api/v1/seeds/${page}`);
 
       if (Object.keys(response.data.content).length !== 0) {
+        // We dont want to change the page if nothing was retrieved from the API
         setSeeds(response.data.content);
       } else {
         if (seeds.length === 1 && page === 0) {
+          // Special case: So the page would update when the last item was removed
           setSeeds(response.data.content);
         }
         if (page > 0) {
+          // If nothing was retrieved and page is larger than zero the page decrements back
           setSeedsPage(page - 1);
         }
       }
@@ -45,6 +52,7 @@ function App() {
     }
   };
 
+  /* Plants GET */
   const getPlants = async (page) => {
     try {
       if (page < 0) {
@@ -69,6 +77,7 @@ function App() {
     }
   };
 
+  /* Archive GET */
   const getArchive = async (page) => {
     try {
       if (page < 0) {
@@ -93,6 +102,7 @@ function App() {
     }
   };
 
+  /* seeds SORT */
   const sortByAge = async (page, asc) => {
     try {
       if (page < 0) {
@@ -117,6 +127,7 @@ function App() {
     }
   };
 
+  /* Plants SORT */
   const sortPlants = async (page, byWhat, asc) => {
     try {
       if (page < 0) {
@@ -141,6 +152,7 @@ function App() {
     }
   };
 
+  /* Archive SORT */
   const sortArchive = async (page, byWhat, asc) => {
     try {
       if (page < 0) {
@@ -167,12 +179,14 @@ function App() {
     }
   };
 
+  /* First page load routines */
   useEffect(() => {
     getPlants(plantsPage);
     getSeeds(seedsPage);
     getArchive(archivePage);
   }, []);
 
+  /* Plants REFRESH */
   const plantsRefresh = (page) => {
     getPlants(page);
     getArchive(0);

@@ -1,10 +1,14 @@
 import React, { useRef, useState } from "react";
 import api from "../../api/axiosConfig";
 
+/* List item specific for seeds */
 const SeedListItem = ({ seed, refresh, page }) => {
   const { type, dateOfStoring, count, age } = seed;
+
+  /* Visibility */
   const [visible, setVisible] = useState(false);
 
+  /* Mouse */
   const handleMouseEnter = () => {
     setVisible(true);
   };
@@ -13,6 +17,7 @@ const SeedListItem = ({ seed, refresh, page }) => {
     setVisible(false);
   };
 
+  /* DELETE */
   const handleDeleteSeed = async (id) => {
     try {
       const response = await api.delete(`/api/v1/seeds/${id}`);

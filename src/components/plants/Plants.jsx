@@ -3,6 +3,7 @@ import List from "../list/List";
 import PlantListItem from "../plantListItem/PlantListItem";
 import PlantsModal from "../plantsModal/PlantsModal";
 
+/* Page for plants that have not yet been disposed */
 function Plants({ plants, refresh, sort, page, setPage }) {
   return (
     <>

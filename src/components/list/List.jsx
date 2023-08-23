@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+/* Skeleton for a basic list */
 const List = ({
   items,
   resourceName,
@@ -8,8 +9,10 @@ const List = ({
   page,
   setPage,
 }) => {
+  /* Items */
   const [itemList, setItemList] = useState([]);
 
+  /* Routine everytime the items change */
   useEffect(() => {
     setItemList(items);
   }, [items]);

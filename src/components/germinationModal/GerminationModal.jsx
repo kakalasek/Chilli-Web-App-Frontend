@@ -2,10 +2,10 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 
+/* Modal specifically made for germination */
 const GerminationModal = ({ plant, refresh, page }) => {
+  /* SHOW and CLOSE */
   const [show, setShow] = useState(false);
-
-  const [sprouted, setSprouted] = useState(0);
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -13,6 +13,10 @@ const GerminationModal = ({ plant, refresh, page }) => {
     setShow(true);
   };
 
+  /* Sprouted */
+  const [sprouted, setSprouted] = useState(0);
+
+  /* UPDATE */
   const handleUpdate = async (e, id) => {
     e.preventDefault();
 

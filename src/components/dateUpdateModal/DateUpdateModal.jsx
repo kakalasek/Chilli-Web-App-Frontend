@@ -2,13 +2,14 @@ import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import api from "../../api/axiosConfig";
 
+/* A skeleton for a modal for updating dates */
 const DateUpdateModal = ({ title, plant, refresh, page }) => {
+  /* Speical variables */
   let today = new Date().toISOString().split("T")[0];
   let dateOfPlanting = plant.dateOfPlanting;
 
+  /* SHOW and CLOSE */
   const [show, setShow] = useState(false);
-
-  const [date, setDate] = useState(undefined);
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -16,11 +17,17 @@ const DateUpdateModal = ({ title, plant, refresh, page }) => {
     setShow(true);
   };
 
+  /* Date */
+  const [date, setDate] = useState(undefined);
+
+  /* UPDATE */
   const handleUpdate = async (e, id) => {
     e.preventDefault();
 
     try {
-      switch (title) {
+      switch (
+        title // Switch determening which date of the plant so update based on passed parameters
+      ) {
         case "Date of first fruit":
           plant.dateOfFirstFruit = date;
           break;

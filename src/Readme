@@ -1,0 +1,28 @@
+---------HOW TO USE---------
+This app allows you to keep track of your chilli seeds and your planted plants.
+Also it provides and archive of all your previously planted plants.
+
+---HOME---
+For now, there is nothing. It may be updated in the future
+
+---SEEDS---
+Here's your seed storage. Just click 'ADD' and you can add new bunch of seeds.
+The app keeps track of the type of the seed, the date of storing, number of seeds aswell as the age in years, which is dynamically calculated and updated.
+You can delete a seed by simply hovering your mouse over it, so the 'DELETE' button appears and clicking on it.
+You can also sort your seeds by age.
+
+---PLANTS---
+Here you have all your currently planted plants. You can gradually update all information about the plants.
+After some of your seeds have sprouted, you can update the record and germination will be automatically calculated for you.
+Like this, you can update all the information about your plants.
+After updating the date of disposal, plants will be transfered to the archive
+You can also sort your plants by various different attributes.
+Deleting a plant is as simple as deleting a seed
+
+---ARCHIVE---
+Only plants with date of disposal will be stored here.
+You can also sort them by various different attributes.
+
+---Important!---
+All records are fetched in pages of 10 and sorting on different pages might be quite clumsy.
+You may run to some bugs, if you really try to
